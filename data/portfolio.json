@@ -1,0 +1,30 @@
+[
+    {
+        "title": "Zimtwirbel",
+        "description": "Moderne E-Commerce Website für Zimtschnecken und Backwaren. Showcases verschiedene Sorten, Lokationen und Community-Integration. Responsive Design mit optimalen Performance.",
+        "image": "../src/assets/zimtwirbel.png",
+        "tags": ["E-Commerce", "Responsive Design", "Nuxt.js", "Food & Beverage"],
+        "link": "https://zimtwirbel.at/"
+    },
+    {
+        "title": "Winkler Bäckerei",
+        "description": "Bäckerei und Café Website mit Filialverwaltung, Frühstücksmenü und Jobs-Portal. WordPress-basiert mit modernem Design und umfangreicher Content-Integration.",
+        "image": "../src/assets/winkler.png",
+        "tags": ["WordPress", "Restaurant", "Multi-Location", "CMS"],
+        "link": "https://www.winkler-brot.at/"
+    },
+    {
+        "title": "DKS Rechtsanwälte",
+        "description": "Professionelle Anwaltskanzlei Website mit Expertise-Showcase. Moderne Darstellung von Juridischen Dienstleistungen, Team-Präsentation und Kontaktmöglichkeiten in Wien & Innsbruck.",
+        "image": "../src/assets/dks.png",
+        "tags": ["Legal Services", "Corporate Website", "Responsive", "B2B"],
+        "link": "https://www.dkslaw.at/"
+    },
+    {
+        "title": "Angyan Legal",
+        "description": "Spezialisierte Rechtsanwalt-Website für Dr. Johannes Angyan. Fokus auf Versicherungsrecht, Gesellschaftsrecht und Immobilienrecht. Clean Design mit klarer Informationsarchitektur.",
+        "image": "../src/assets/angyan-legal.png",
+        "tags": ["Legal Services", "Solo Practice", "Minimalist Design", "Rechtsanwalt"],
+        "link": "https://angyan-legal.at/"
+    }
+]

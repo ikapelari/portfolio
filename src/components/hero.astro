@@ -1,0 +1,92 @@
+---
+import { Picture } from 'astro:assets';
+import portrait from '../assets/Ingo_Kapelari_2023.jpg';
+---
+<!-- Component Template (HTML + JS Expressions) -->
+
+<section class="hero h-screen flex items-center">
+    <div class="flex flex-wrap  items-center w-full h-full">
+        <div class="w-full left-col h-full flex items-center">
+            <div class="p-4 text-left w-full h-full flex items-center justify-center flex-col">
+                <div class="max-w-2xl">
+
+
+                <h1 id="heading" class="text-6xl font-semibold mb-6">
+                    Hello World.
+                </h1>
+                <p class="text fade-up text-2xl">
+                    My name is Ingo. <br>
+                    I am a Frontend Developer based in Vienna 👨🏻‍💻
+                </p>
+
+
+                    <!-- <div class="text-6xl typed"></div> -->
+                    <!-- <p class="text-2xl typed mt-4">My name is Ingo. <br> I'm am Frontend Developer based in Vienna</p> -->
+                </div>
+            </div>
+        </div>
+        <div class="w-0 right-col">
+                        <Picture
+                            src={portrait}
+                            formats={["avif", "webp"]}
+                            widths={[480, 720, 1080, 1440]}
+                            sizes="(min-width: 1024px) 50vw, 100vw"
+                            alt="Portrait von Ingo Kapelari"
+                            class="w-full h-auto opacity-0 clip-image"
+                        />
+        </div>
+    </div>
+</section>
+
+<script>
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+// create
+let mm = gsap.matchMedia();
+
+gsap.registerPlugin(ScrollTrigger) ;
+gsap.registerPlugin(SplitText);
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    //   strings: ['<h1>Hello World.</h1>', '^500 My name is Ingo.', '^500 I am a Frontend Developer based in Vienna 👨🏻‍💻'],
+    //   typeSpeed: 50,
+    //   backSpeed: 30,
+    //   showCursor: false,
+    //   backDelay: 1000,
+    // });
+
+    // add a media query. When it matches, the associated function will run
+mm.add("(min-width: 800px)", () => {
+//     let st = ScrollTrigger.create({
+//   trigger: ".hero",
+//   pin: ".right-col img",
+//   start: "top center",
+//   end: "+=500",
+// });
+
+
+    const tl = gsap.timeline();
+    tl.set("h1", { opacity: 1 });
+    tl.set(".fade-up", { y: 0, opacity: 0 });
+    tl.set(".right-col img", { y: 0, opacity: 0});
+
+
+    let split = SplitText.create("#heading", { type: "chars" });
+    //now animate each character into place from 20px below, fading in:
+    gsap.from(split.chars, {
+        y: 0,
+        scale: .9,
+        autoAlpha: 0,
+        stagger: 0.1
+    });
+        tl.to(".left-col", { duration: .8, x: 0, opacity: 1, ease: "sine.inOut", delay: 2, width: "50%" });
+        tl.to(".right-col", { duration: 1, width: "50%", ease: "sine.inOut" }, "-=0");
+        tl.to(".right-col img", { duration: .8, opacity: 1, ease: "sine.inOut", y: 0 }, "+=.1");
+        tl.to(".fade-up", { duration: .8, y: 0, opacity: 1, ease: "sine.inOut", delay: 1.5 });
+
+
+    });
+});
+</script>

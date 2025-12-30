@@ -1,0 +1,67 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Image {
+  thumb: ImageMetadata;
+  full: string;
+  width: number;
+  height: number;
+  alt: string;
+}
+
+interface Props {
+  images: Image[];
+  galleryId?: string;
+}
+
+const { images, galleryId = "pswp-gallery" } = Astro.props;
+---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.min.css" />
+
+<div class={`pswp-gallery flex flex-col gap-6 ${galleryId}`} id={galleryId}>
+  {images.map((image, index) => (
+    <a
+      href={image.full}
+      data-pswp-width={image.width}
+      data-pswp-height={image.height}
+      target="_blank"
+      class={`pswp-gallery-item w-full md:w-1/2 ${index % 2 === 1 ? 'md:ml-auto' : ''}`}
+    >
+      <Picture 
+        src={image.thumb}
+        formats={["avif", "webp"]}
+        widths={[300, 600, 900, 1200]}
+        sizes="(min-width: 768px) 50vw, 100vw"
+        alt={image.alt}
+        class="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 object-cover"
+        loading="lazy"
+      />
+    </a>
+  ))}
+</div>
+
+<script type="module" define:vars={{ galleryId }}>
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe-lightbox.umd.min.js';
+  script.onload = () => {
+    const lightbox = new window.PhotoSwipeLightbox({
+      gallery: `#${galleryId}`,
+      children: 'a',
+      pswpModule: window.PhotoSwipe,
+    });
+
+    // Hover to open gallery
+    document.querySelectorAll(`#${galleryId} a`).forEach((link) => {
+      link.addEventListener('mouseenter', (e) => {
+        const links = document.querySelectorAll(`#${galleryId} a`);
+        const index = Array.from(links).indexOf(e.currentTarget);
+        lightbox.loadAndOpen(index);
+      });
+    });
+
+    lightbox.init();
+  };
+  document.head.appendChild(script);
+</script>

@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+.hanken-grotesk-400 {
+    font-family: "Hanken Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.hanken-grotesk-700 {
+    font-family: "Hanken Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: "Hanken Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.clip-image {
+/* clip-path: polygon(33% 0%, 9% 39%, 32% 67%, 22% 95%, 30% 100%, 73% 100%, 77% 76%, 66% 43%, 78% 16%, 66% 0%); */
+}
