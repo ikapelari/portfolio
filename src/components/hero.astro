@@ -6,7 +6,7 @@ import portrait from '../assets/Ingo_Kapelari_2023.jpg';
 
 <section class="hero h-screen flex items-center">
     <div class="flex flex-wrap  items-center w-full h-full">
-        <div class="w-full left-col h-full flex items-center">
+        <div class="w-full left-col h-full flex flex-col items-center">
             <div class="p-4 text-left w-full h-full flex items-center justify-center flex-col">
                 <div class="max-w-2xl">
 
@@ -24,6 +24,52 @@ import portrait from '../assets/Ingo_Kapelari_2023.jpg';
                     <!-- <p class="text-2xl typed mt-4">My name is Ingo. <br> I'm am Frontend Developer based in Vienna</p> -->
                 </div>
             </div>
+            <div class="timeline opacity-0  max-w-2xl ">
+                <h3 class="text-3xl font-semibold mb-8">Experience</h3>
+                <div class="space-y-8">
+                    <div class="timeline-item flex gap-6">
+                        <div class="timeline-marker shrink-0">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full mt-1"></div>
+                            <div class="w-px h-full bg-gray-300 ml-[7px] mt-2"></div>
+                        </div>
+                            <div class="timeline-content">
+                            <span class="text-sm text-gray-500">2015 - 2018</span>
+                            <h4 class="text-xl font-semibold mt-1">Education</h4>
+                            <p class="text-gray-600 mt-2">Media Design & Web Development</p>
+                            <p class="text-gray-700 mt-2">Studied modern web technologies and design principles.</p>
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <div class="timeline-item flex gap-6">
+                      <div class="timeline-marker shrink-0">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full mt-1"></div>
+                            <div class="w-px h-full bg-gray-300 ml-[7px] mt-2"></div>
+                        </div>
+                    
+                        <div class="timeline-content pb-4">
+                            <span class="text-sm text-gray-500">2020 - Present</span>
+                            <h4 class="text-xl font-semibold mt-1">Frontend Developer</h4>
+                            <p class="text-gray-600 mt-2">Kapelari Studio · Vienna</p>
+                            <p class="text-gray-700 mt-2">Developing modern web applications with Vue.js and Astro, with a strong focus on performance optimization and responsive design. Experienced in building custom WordPress themes and ACF-based Gutenberg blocks, using Tailpress (Tailwind CSS) and Bootstrap for scalable, maintainable frontends.</p>
+                        </div>
+                    </div>
+
+                        <div class="timeline-item flex gap-6">
+                              <div class="timeline-marker shrink-0">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full mt-1"></div>
+                        </div>
+                        
+                        <div class="timeline-content pb-4">
+                            <span class="text-sm text-gray-500">2020</span>
+                            <h4 class="text-xl font-semibold mt-1">Web Developer Training</h4>
+                            <p class="text-gray-600 mt-2">Wifi · Vienna</p>
+                            <p class="text-gray-700 mt-2">Completed the Web Developer (PHP & SQL) program at WIFI Vienna, a professional training covering HTML, CSS, JavaScript, PHP, SQL, and the Laravel framework. The course focused on modern web development practices and included building a full-stack web application as a final project.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="w-0 right-col">
                         <Picture
@@ -32,7 +78,7 @@ import portrait from '../assets/Ingo_Kapelari_2023.jpg';
                             widths={[480, 720, 1080, 1440]}
                             sizes="(min-width: 1024px) 50vw, 100vw"
                             alt="Portrait von Ingo Kapelari"
-                            class="w-full h-auto opacity-0 clip-image"
+                            class="w-full h-auto opacity-0 clip-image max-w-2xs"
                         />
         </div>
     </div>
@@ -41,15 +87,22 @@ import portrait from '../assets/Ingo_Kapelari_2023.jpg';
 <script>
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { SplitText } from 'gsap/SplitText';
 // create
 let mm = gsap.matchMedia();
 
-gsap.registerPlugin(ScrollTrigger) ;
-gsap.registerPlugin(SplitText);
+
+gsap.registerPlugin(ScrollSmoother, ScrollTrigger, SplitText) 
 
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    ScrollSmoother.create({
+	smooth: 1,
+	effects: true
+});
+
     //   strings: ['<h1>Hello World.</h1>', '^500 My name is Ingo.', '^500 I am a Frontend Developer based in Vienna 👨🏻‍💻'],
     //   typeSpeed: 50,
     //   backSpeed: 30,
@@ -59,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // add a media query. When it matches, the associated function will run
 mm.add("(min-width: 800px)", () => {
+
 //     let st = ScrollTrigger.create({
 //   trigger: ".hero",
 //   pin: ".right-col img",
@@ -67,26 +121,57 @@ mm.add("(min-width: 800px)", () => {
 // });
 
 
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".hero", // The element that gets pinned
+            pin: true,                 // Pin the trigger element
+            start: "top top",          // When trigger's top hits viewport's top
+            end: "+=2000",             // Scroll distance (scrolling 2000px keeps it pinned)
+            scrub: 5,                  // Smooth scrubbing (1s delay)
+            markers: true              // Remove this in production
+        }
+    });
     tl.set("h1", { opacity: 1 });
-    tl.set(".fade-up", { y: 0, opacity: 0 });
+    tl.set(".fade-up", { y: 0, opacity: 0});
     tl.set(".right-col img", { y: 0, opacity: 0});
+    tl.set(".timeline", { autoAlpha: 0, y: 30 });
+    tl.set(".timeline-item", { opacity: 0, y: 20 });
+
+
 
 
     let split = SplitText.create("#heading", { type: "chars" });
     //now animate each character into place from 20px below, fading in:
     gsap.from(split.chars, {
         y: 0,
-        scale: .9,
+        scale: 1,
         autoAlpha: 0,
-        stagger: 0.1
+        stagger: 0.2
     });
         tl.to(".left-col", { duration: .8, x: 0, opacity: 1, ease: "sine.inOut", delay: 2, width: "50%" });
         tl.to(".right-col", { duration: 1, width: "50%", ease: "sine.inOut" }, "-=0");
-        tl.to(".right-col img", { duration: .8, opacity: 1, ease: "sine.inOut", y: 0 }, "+=.1");
-        tl.to(".fade-up", { duration: .8, y: 0, opacity: 1, ease: "sine.inOut", delay: 1.5 });
+        tl.to(".right-col img", { duration: .8, opacity: 1, ease: "sine.inOut", y: 0 , clipPath: "circle(100% at 50% 50%)",  }, "+=.1");
 
-
+        tl.to(".fade-up", { duration: 1, y: 0, opacity: 1, ease: "sine.inOut"}, "-=0.5" );
+        tl.to(".left-col #heading, .left-col .fade-up", { autoAlpha: 0, ease: "sine.inOut"} );
+     
+        tl.to(".timeline", { autoAlpha: 1, y: -429 }, "+=1,5");
+        tl.to(".timeline-item", { 
+            duration: 0.8, 
+            opacity: 1, 
+            y: 0, 
+            stagger: 0.3,
+            ease: "power2.out" 
+        }, "-=0.3");
+        tl.to(".right-col img", { 
+            position: "fixed", 
+            top: "20px", 
+            right: "20px", 
+            width: "64px", 
+            height: "64px",
+            duration: 0.8,
+            ease: "sine.inOut"
+        }, "-=0.5");
     });
 });
 </script>

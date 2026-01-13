@@ -22,5 +22,18 @@ body {
 }
 
 .clip-image {
-/* clip-path: polygon(33% 0%, 9% 39%, 32% 67%, 22% 95%, 30% 100%, 73% 100%, 77% 76%, 66% 43%, 78% 16%, 66% 0%); */
+    clip-path: circle(0% at center);
+    border-radius: 50%;
+    transition: clip-path 1s ease-in-out;
+}
+
+.clip-image-pinned {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    z-index: 50;
+    border-radius: 50%;
 }
