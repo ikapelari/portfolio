@@ -126,14 +126,15 @@ mm.add("(min-width: 800px)", () => {
             trigger: ".hero", // The element that gets pinned
             pin: true,                 // Pin the trigger element
             start: "top top",          // When trigger's top hits viewport's top
-            end: "+=2000",             // Scroll distance (scrolling 2000px keeps it pinned)
+            end: "+=3000",             // Scroll distance (scrolling 2000px keeps it pinned)
             scrub: 5,                  // Smooth scrubbing (1s delay)
             markers: true              // Remove this in production
         }
     });
     tl.set("h1", { opacity: 1 });
     tl.set(".fade-up", { y: 0, opacity: 0});
-    tl.set(".right-col img", { y: 0, opacity: 0});
+    tl.set(".right-col img", { y: 0, opacity: 0, right: '64px', top: '64px', width: "128px", 
+            height: "128px", clipPath: "circle(0% at 50% 50%)" });
     tl.set(".timeline", { autoAlpha: 0, y: 30 });
     tl.set(".timeline-item", { opacity: 0, y: 20 });
 
@@ -148,14 +149,14 @@ mm.add("(min-width: 800px)", () => {
         autoAlpha: 0,
         stagger: 0.2
     });
-        tl.to(".left-col", { duration: .8, x: 0, opacity: 1, ease: "sine.inOut", delay: 2, width: "50%" });
-        tl.to(".right-col", { duration: 1, width: "50%", ease: "sine.inOut" }, "-=0");
+        tl.to(".left-col", { duration: .8, x: 0, opacity: 1, ease: "sine.inOut", delay: 2, width: "100%" });
+        tl.to(".right-col", { duration: 2, width: "100%", ease: "sine.inOut" }, "-=0");
         tl.to(".right-col img", { duration: .8, opacity: 1, ease: "sine.inOut", y: 0 , clipPath: "circle(100% at 50% 50%)",  }, "+=.1");
 
-        tl.to(".fade-up", { duration: 1, y: 0, opacity: 1, ease: "sine.inOut"}, "-=0.5" );
+        tl.to(".fade-up", { duration: 5, y: 0, opacity: 1, ease: "sine.inOut"}, "-=0" );
         tl.to(".left-col #heading, .left-col .fade-up", { autoAlpha: 0, ease: "sine.inOut"} );
      
-        tl.to(".timeline", { autoAlpha: 1, y: -429 }, "+=1,5");
+        tl.to(".timeline", { autoAlpha: 1, y: -200 }, "+=1,5");
         tl.to(".timeline-item", { 
             duration: 0.8, 
             opacity: 1, 
@@ -165,13 +166,13 @@ mm.add("(min-width: 800px)", () => {
         }, "-=0.3");
         tl.to(".right-col img", { 
             position: "fixed", 
-            top: "20px", 
-            right: "20px", 
-            width: "64px", 
-            height: "64px",
-            duration: 0.8,
+            top: "64px", 
+            right: "64px", 
+            width: "128px", 
+            height: "128px",
+            duration: 2,
             ease: "sine.inOut"
-        }, "-=0.5");
+        }, "-=2");
     });
 });
 </script>
